@@ -1,9 +1,14 @@
+import EventDashboard from '../../features/events/dashboard/EventDashboard'
+import NavBar from './nav/NavBar'
+
 function App() {
 
   return (
-    <h1>
-      Welcome to revents
-    </h1>    
+    <>
+      <NavBar />      
+      
+      <EventDashboard />
+    </>
   )
 }
 
