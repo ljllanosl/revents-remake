@@ -5,7 +5,7 @@ export default function NavBar() {
     // Simple navbar with tailwind
     <header>
       <nav className="bg-gradient-to-r from-blue-900 from-0% via-cyan-700 via-70% to-teal-500 to-90%  p-4 fixed top-0 left-0 right-0 z-10">
-        <div className="container max-w-5xl mx-auto">
+        <div className="mx-auto max-w-7xl">
           <div className="flex justify-between items-center">
             <div className="flex flex-row gap-5 text-white">
               <a href="#" className='flex flex-row gap-5'>

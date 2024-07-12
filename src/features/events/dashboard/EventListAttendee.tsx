@@ -1,9 +1,7 @@
-import { ListItem } from '@tremor/react'
-
 export default function EventListAttendee() {
   return (
-    <ListItem>
-      <img src="/user.png" alt="user" className='rounded-full size-5' />
-    </ListItem>
+    <li>
+      <img src="/user.png" alt="user" className='rounded-full size-8' />
+    </li>
   )
 }

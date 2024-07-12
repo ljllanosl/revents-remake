@@ -5,13 +5,13 @@ import EventListAttendee from './EventListAttendee'
 export default function EventListItem() {
   return (
     <Card>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-3'>
         <div className="flex flex-row gap-5">
           <div className="w-2/12">
             <img src="/user.png" alt="user" className='rounded-full' />
           </div>
           <div className="w-10/12">
-            <h2 className='text-xl'>Event Title</h2>
+            <h2 className='text-tremor-title text-tremor-content-strong font-semibold'>Event Title</h2>
             <p>Event Date</p>
             <p>Hosted by</p>
           </div>
@@ -20,13 +20,11 @@ export default function EventListItem() {
           <Icon icon={RiTimeFill} /> Date
           <Icon icon={RiMapPin2Fill} /> Venue
         </div>
-        <div className=''>
-          <List>
-            <EventListAttendee />
-            <EventListAttendee />
-            <EventListAttendee />
-          </List>
-        </div>
+        <ul className='flex flex-row gap-3 py-5'>
+          <EventListAttendee />
+          <EventListAttendee />
+          <EventListAttendee />
+        </ul>
         <div className='flex flex-row justify-between items-center'>
           <span>Description of the event</span>
           <Button color='teal' variant='primary'>View</Button>
