@@ -1,6 +1,10 @@
 import { Button, Card, DatePicker, Select, SelectItem, Textarea, TextInput } from '@tremor/react'
 
-export default function EventForm() {
+interface Props {
+  setFormOpen: (formOpen: boolean) => void
+}
+
+export default function EventForm({ setFormOpen }: Props) {
   return (
     <Card>
       <h1 className='text-tremor-title text-tremor-content-strong font-semibold'>Create Event</h1>
@@ -39,9 +43,13 @@ export default function EventForm() {
           placeholder='Venue'
           required
         />
-        <DatePicker id="date"/>
+        <DatePicker id="date" />
         <div className='flex flex-row gap-3 mt-3 justify-end'>
-          <Button type="button" variant='secondary'>Cancel</Button>
+          <Button
+            onClick={() => setFormOpen(false)}
+            type="button"
+            variant='secondary'
+          >Cancel</Button>
           <Button type="submit" color='green'>Submit</Button>
         </div>
 

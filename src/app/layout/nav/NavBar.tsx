@@ -1,6 +1,10 @@
 import { Button } from '@tremor/react'
 
-export default function NavBar() {
+interface Props{
+  setFormOpen: (formOpen: boolean) => void
+}
+
+export default function NavBar({setFormOpen}: Props) {
   return (
     // Simple navbar with tailwind
     <header>
@@ -12,7 +16,10 @@ export default function NavBar() {
                 <img src="./logo.png" alt="logo" className='size-10' />
                 <h1 className="text-2xl">Re-vents</h1>
               </a>
-              <Button color='green'>Create Event</Button>
+              <Button 
+              color='green'
+              onClick={() => setFormOpen(true)}
+              >Create Event</Button>
             </div>
             <div className='flex flex-row gap-5'>
               <Button variant="primary">Login</Button>
