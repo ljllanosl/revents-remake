@@ -1,4 +1,4 @@
-import { Button, Card, DatePicker, Select, SelectItem, Textarea, TextInput } from '@tremor/react'
+import { Button, Card, TextInput } from '@tremor/react'
 import { ChangeEvent, useState } from 'react'
 import { AppEvent } from '../../../types'
 
@@ -6,9 +6,10 @@ interface Props {
   setFormOpen: (formOpen: boolean) => void
   addEvent: (event: AppEvent) => void
   selectedEvent: AppEvent | null
+  updatedEvent: (event: AppEvent) => void
 }
 
-export default function EventForm({ setFormOpen, addEvent, selectedEvent }: Props) {
+export default function EventForm({ setFormOpen, addEvent, selectedEvent, updatedEvent }: Props) {
   const initialValues = selectedEvent ?? {
     title: '',
     category: '',
@@ -22,13 +23,15 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent }: Prop
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    addEvent({
-      ...values,
-      id: crypto.randomUUID(),
-      attendees: [],
-      hostPhotoURL: '',
-      hostedBy: '',
-    })
+    selectedEvent
+      ? updatedEvent({ ...selectedEvent, ...values })
+      : addEvent({
+        ...values,
+        id: crypto.randomUUID(),
+        attendees: [],
+        hostPhotoURL: '',
+        hostedBy: '',
+      })
     setFormOpen(false)
   }
 
@@ -39,7 +42,9 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent }: Prop
 
   return (
     <Card>
-      <h1 className='text-tremor-title text-tremor-content-strong font-semibold'>Create Event</h1>
+      <h1 className='text-tremor-title text-tremor-content-strong font-semibold'>
+        {selectedEvent ? 'Update Event' : 'Create Event'}
+      </h1>
       <form className='flex flex-col gap-2 mt-2' onSubmit={onSubmit}>
         <TextInput
           type='text'

@@ -7,8 +7,8 @@ import { AppEvent } from '../../../types'
 interface Props {
   formOpen: boolean;
   setFormOpen: (formOpen: boolean) => void;
+  selectEvent: (event: AppEvent| null) => void;
   selectedEvent: AppEvent | null;
-  selectEvent: (event: AppEvent) => void;
 }
 
 export default function EventDashboard({ formOpen, setFormOpen, selectEvent, selectedEvent }: Props) {
@@ -25,6 +25,14 @@ export default function EventDashboard({ formOpen, setFormOpen, selectEvent, sel
     })
   }
 
+  function updateEvent(updatedEvent: AppEvent)  {
+    setEvents(prevState => {
+      return [...prevState.filter(e => e.id !== updatedEvent.id), updatedEvent]
+    })
+    selectEvent(null)
+    setFormOpen(false)
+  }
+
 
   return (
     <main className='flex flex-row gap-5 mt-28 container max-w-7xl mx-auto'>
@@ -38,6 +46,7 @@ export default function EventDashboard({ formOpen, setFormOpen, selectEvent, sel
         {formOpen &&
           <EventForm
             setFormOpen={setFormOpen}
+            updatedEvent={updateEvent}
             addEvent={addEvent}
             selectedEvent={selectedEvent}
             key={selectedEvent ? selectedEvent.id : 'create'}
