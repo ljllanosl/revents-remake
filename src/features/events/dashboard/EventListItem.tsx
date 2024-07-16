@@ -6,9 +6,10 @@ import { AppEvent } from '../../../types'
 interface Props {
   event: AppEvent
   selectEvent: (event: AppEvent) => void
+  deleteEvent: (eventId: string) => void
 }
 
-export default function EventListItem({ event, selectEvent }: Props) {
+export default function EventListItem({ event, selectEvent, deleteEvent }: Props) {
   return (
     <Card>
       <div className='flex flex-col'>
@@ -32,13 +33,20 @@ export default function EventListItem({ event, selectEvent }: Props) {
             <EventListAttendee key={attendee.id} attendee={attendee} />
           ))}
         </ul>
-        <div className='flex flex-row justify-between items-center'>
+        <div className='flex flex-row justify-between items-center '>
           <span>{event.description}</span>
-          <Button
-            color='teal'
-            variant='primary'
-            onClick={() => selectEvent(event)}
-          >View</Button>
+          <div className='flex flex-row justify-end gap-3'>
+            <Button
+              color='red'
+              variant='primary'
+              onClick={() => deleteEvent(event.id)}
+            >Delete</Button>
+            <Button
+              color='teal'
+              variant='primary'
+              onClick={() => selectEvent(event)}
+            >View</Button>
+          </div>
         </div>
       </div>
     </Card>

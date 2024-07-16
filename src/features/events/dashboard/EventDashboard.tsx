@@ -33,6 +33,12 @@ export default function EventDashboard({ formOpen, setFormOpen, selectEvent, sel
     setFormOpen(false)
   }
 
+  function deleteEvent(eventId: string) {
+    setEvents(prevState => {
+      return [...prevState.filter(e => e.id !== eventId)]
+    })
+  }
+
 
   return (
     <main className='flex flex-row gap-5 mt-28 container max-w-7xl mx-auto'>
@@ -40,6 +46,7 @@ export default function EventDashboard({ formOpen, setFormOpen, selectEvent, sel
         <EventList
           events={events}
           selectEvent={selectEvent}
+          deleteEvent={deleteEvent}
         />
       </section>
       <section className='w-4/12'>
