@@ -5,9 +5,10 @@ import { AppEvent } from '../../../types'
 
 interface Props {
   event: AppEvent
+  selectEvent: (event: AppEvent) => void
 }
 
-export default function EventListItem({ event }: Props) {
+export default function EventListItem({ event, selectEvent }: Props) {
   return (
     <Card>
       <div className='flex flex-col'>
@@ -21,7 +22,7 @@ export default function EventListItem({ event }: Props) {
             <p>Hosted by {event.hostedBy}</p>
           </div>
         </div>
-        <Divider/>
+        <Divider />
         <div className='flex flex-row items-center'>
           <Icon icon={RiTimeFill} /> {event.date}
           <Icon icon={RiMapPin2Fill} /> {event.venue}
@@ -33,7 +34,11 @@ export default function EventListItem({ event }: Props) {
         </ul>
         <div className='flex flex-row justify-between items-center'>
           <span>{event.description}</span>
-          <Button color='teal' variant='primary'>View</Button>
+          <Button
+            color='teal'
+            variant='primary'
+            onClick={() => selectEvent(event)}
+          >View</Button>
         </div>
       </div>
     </Card>

@@ -5,10 +5,11 @@ import { AppEvent } from '../../../types'
 interface Props {
   setFormOpen: (formOpen: boolean) => void
   addEvent: (event: AppEvent) => void
+  selectedEvent: AppEvent | null
 }
 
-export default function EventForm({ setFormOpen, addEvent }: Props) {
-  const initialValues = {
+export default function EventForm({ setFormOpen, addEvent, selectedEvent }: Props) {
+  const initialValues = selectedEvent ?? {
     title: '',
     category: '',
     description: '',

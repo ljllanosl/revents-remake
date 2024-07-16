@@ -3,13 +3,20 @@ import EventListItem from './EventListItem'
 
 interface Props {
   events: AppEvent[]
+  selectEvent: (event: AppEvent) => void
 }
 
-export default function EventList({ events }: Props) {
+export default function EventList({ events, selectEvent
+
+}: Props) {
   return (
     <div className='flex flex-col gap-5'>
       {events.map(event => (
-        <EventListItem key={event.id} event={event} />
+        <EventListItem
+          key={event.id}
+          event={event}
+          selectEvent={selectEvent}
+        />
       ))}
     </div>
   )
