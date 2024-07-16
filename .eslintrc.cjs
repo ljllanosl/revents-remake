@@ -20,5 +20,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     'react-hooks/exhaustive-deps': 'off',
     "no-undef": "off",
+    'jsx-quotes': ['error', 'prefer-single'],
   },
 }

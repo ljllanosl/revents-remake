@@ -7,7 +7,7 @@ interface Props {
 export default function EventListAttendee({ attendee }: Props) {
   return (
     <li>
-      <img src={attendee.photoURL} alt="user" className='rounded-full size-8' />
+      <img src={attendee.photoURL} alt='user' className='rounded-full size-8' />
     </li>
   )
 }

@@ -11,11 +11,11 @@ export default function EventListItem({ event }: Props) {
   return (
     <Card>
       <div className='flex flex-col'>
-        <div className="flex flex-row gap-5">
-          <div className="w-2/12">
-            <img src={event.hostPhotoURL} alt="user" className='rounded-full' />
+        <div className='flex flex-row gap-5'>
+          <div className='w-2/12'>
+            <img src={event.hostPhotoURL || '/user.png'} alt='user' className='rounded-full' />
           </div>
-          <div className="w-10/12">
+          <div className='w-10/12'>
             <h2 className='text-tremor-title text-tremor-content-strong font-semibold'>{event.title}</h2>
             <p>Date: {event.date}</p>
             <p>Hosted by {event.hostedBy}</p>
