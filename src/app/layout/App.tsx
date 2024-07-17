@@ -1,33 +1,21 @@
-import { useState } from 'react'
-import EventDashboard from '../../features/events/dashboard/EventDashboard'
+import HomePage from '../../features/home/HomePage'
 import NavBar from './nav/NavBar'
-import { AppEvent } from '../../types'
+import { Outlet, useLocation } from 'react-router-dom'
 
 function App() {
-  const [formOpen, setFormOpen] = useState(false)
-  const [selectedEvent, setSelectedEvent] = useState<AppEvent | null>(null)
-
-
-  function handleSelectEvent(event: AppEvent | null) {
-    setSelectedEvent(event)
-    setFormOpen(true)
-  }
-
-  function handleCreateFormOpen() {
-    setSelectedEvent(null)
-    setFormOpen(true)
-  }
+  const location = useLocation()
 
   return (
-    <>
-      <NavBar setFormOpen={handleCreateFormOpen} />
-      <EventDashboard
+    <div className=''>
+      <NavBar />
+      {location.pathname === '/' ? <HomePage /> : <Outlet />}
+      {/* <EventDashboard
         formOpen={formOpen}
         setFormOpen={setFormOpen}
         selectedEvent={selectedEvent}
         selectEvent={handleSelectEvent}
-      />
-    </>
+      /> */}
+    </div>
   )
 }
 

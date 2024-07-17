@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react'
 import { sampleData } from '../../../app/api/sampleData'
-import EventForm from '../form/EventForm'
 import EventList from './EventList'
 import { AppEvent } from '../../../types'
 
-interface Props {
-  formOpen: boolean;
-  setFormOpen: (formOpen: boolean) => void;
-  selectEvent: (event: AppEvent| null) => void;
-  selectedEvent: AppEvent | null;
-}
 
-export default function EventDashboard({ formOpen, setFormOpen, selectEvent, selectedEvent }: Props) {
+export default function EventDashboard() {
 
   const [events, setEvents] = useState<AppEvent[]>([])
 
@@ -19,45 +12,13 @@ export default function EventDashboard({ formOpen, setFormOpen, selectEvent, sel
     setEvents(sampleData)
   }, [])
 
-  function addEvent(event: AppEvent) {
-    setEvents(prevState => {
-      return [...prevState, event]
-    })
-  }
-
-  function updateEvent(updatedEvent: AppEvent)  {
-    setEvents(prevState => {
-      return [...prevState.filter(e => e.id !== updatedEvent.id), updatedEvent]
-    })
-    selectEvent(null)
-    setFormOpen(false)
-  }
-
-  function deleteEvent(eventId: string) {
-    setEvents(prevState => {
-      return [...prevState.filter(e => e.id !== eventId)]
-    })
-  }
-
-
   return (
-    <main className='flex flex-row gap-5 mt-28 container max-w-7xl mx-auto'>
+    <main className='flex flex-row gap-5 mt-28 container mx-auto max-w-6xl'>
       <section className='w-8/12'>
-        <EventList
-          events={events}
-          selectEvent={selectEvent}
-          deleteEvent={deleteEvent}
-        />
+        <EventList events={events}/>
       </section>
       <section className='w-4/12'>
-        {formOpen &&
-          <EventForm
-            setFormOpen={setFormOpen}
-            updatedEvent={updateEvent}
-            addEvent={addEvent}
-            selectedEvent={selectedEvent}
-            key={selectedEvent ? selectedEvent.id : 'create'}
-          />}
+        <h2>Filters</h2>
       </section>
     </main>
   )

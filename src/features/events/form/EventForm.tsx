@@ -1,16 +1,8 @@
-import { Button, Card, TextInput } from '@tremor/react'
+import { Button, Card, TextInput } from 'flowbite-react'
 import { ChangeEvent, useState } from 'react'
-import { AppEvent } from '../../../types'
 
-interface Props {
-  setFormOpen: (formOpen: boolean) => void
-  addEvent: (event: AppEvent) => void
-  selectedEvent: AppEvent | null
-  updatedEvent: (event: AppEvent) => void
-}
-
-export default function EventForm({ setFormOpen, addEvent, selectedEvent, updatedEvent }: Props) {
-  const initialValues = selectedEvent ?? {
+export default function EventForm() {
+  const initialValues = {
     title: '',
     category: '',
     description: '',
@@ -23,16 +15,17 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent, update
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    selectedEvent
-      ? updatedEvent({ ...selectedEvent, ...values })
-      : addEvent({
-        ...values,
-        id: crypto.randomUUID(),
-        attendees: [],
-        hostPhotoURL: '',
-        hostedBy: '',
-      })
-    setFormOpen(false)
+    console.log(values)
+    // selectedEvent
+    //   ? updatedEvent({ ...selectedEvent, ...values })
+    //   : addEvent({
+    //     ...values,
+    //     id: crypto.randomUUID(),
+    //     attendees: [],
+    //     hostPhotoURL: '',
+    //     hostedBy: '',
+    //   })
+    // setFormOpen(false)
   }
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
@@ -41,9 +34,9 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent, update
   }
 
   return (
-    <Card>
+    <Card className='mt-28 mx-auto max-w-6xl'>
       <h1 className='text-tremor-title text-tremor-content-strong font-semibold'>
-        {selectedEvent ? 'Update Event' : 'Create Event'}
+        {'Create Event'}
       </h1>
       <form className='flex flex-col gap-2 mt-2' onSubmit={onSubmit}>
         <TextInput
@@ -109,11 +102,7 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent, update
           onChange={e => handleInputChange(e)}
         />
         <div className='flex flex-row gap-3 mt-3 justify-end'>
-          <Button
-            onClick={() => setFormOpen(false)}
-            type='button'
-            variant='secondary'
-          >Cancel</Button>
+          <Button type='button'>Cancel</Button>
           <Button type='submit' color='green'>Submit</Button>
         </div>
       </form>

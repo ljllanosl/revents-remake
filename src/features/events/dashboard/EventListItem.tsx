@@ -1,15 +1,13 @@
-import { RiMapPin2Fill, RiTimeFill } from '@remixicon/react'
-import { Button, Card, Divider, Icon } from '@tremor/react'
 import EventListAttendee from './EventListAttendee'
 import { AppEvent } from '../../../types'
+import { Button, Card } from 'flowbite-react'
+import { ClockIcon, MapPinIcon } from '@heroicons/react/24/solid'
 
 interface Props {
   event: AppEvent
-  selectEvent: (event: AppEvent) => void
-  deleteEvent: (eventId: string) => void
 }
 
-export default function EventListItem({ event, selectEvent, deleteEvent }: Props) {
+export default function EventListItem({ event }: Props) {
   return (
     <Card>
       <div className='flex flex-col'>
@@ -23,10 +21,9 @@ export default function EventListItem({ event, selectEvent, deleteEvent }: Props
             <p>Hosted by {event.hostedBy}</p>
           </div>
         </div>
-        <Divider />
         <div className='flex flex-row items-center'>
-          <Icon icon={RiTimeFill} /> {event.date}
-          <Icon icon={RiMapPin2Fill} /> {event.venue}
+          <ClockIcon className='size-4'/> {event.date}
+          <MapPinIcon className='size-4'/> {event.venue}
         </div>
         <ul className='flex flex-row gap-3 py-5'>
           {event.attendees.map(attendee => (
@@ -38,13 +35,9 @@ export default function EventListItem({ event, selectEvent, deleteEvent }: Props
           <div className='flex flex-row justify-end gap-3'>
             <Button
               color='red'
-              variant='primary'
-              onClick={() => deleteEvent(event.id)}
             >Delete</Button>
             <Button
               color='teal'
-              variant='primary'
-              onClick={() => selectEvent(event)}
             >View</Button>
           </div>
         </div>
