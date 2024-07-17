@@ -54,21 +54,7 @@ export default function EventForm() {
           placeholder='Category'
           value={values.category}
           onChange={e => handleInputChange(e)}
-        />
-        {/* <Select
-          id='category'
-          name='category'
-          defaultValue='1'
-        >
-          <SelectItem value='1'>Music</SelectItem>
-          <SelectItem value='2'>Sport</SelectItem>
-          <SelectItem value='3'>Culture</SelectItem>
-        </Select> */}
-        {/* <Textarea
-          name='description'
-          id='description'
-          placeholder='Description'
-        ></Textarea> */}
+        />        
         <TextInput
           type='text'
           name='description'

@@ -1,5 +1,6 @@
 import { Button, Navbar } from 'flowbite-react'
 import { NavLink } from 'react-router-dom'
+import SignedInMenu from './SignedInMenu'
 
 export default function NavBar() {
   return (
@@ -14,8 +15,8 @@ export default function NavBar() {
           <span className='font-medium text-xl' >Events</span>
         </NavLink>
         <Button as={NavLink} to='/createEvent'>Create Event</Button>
-        <Button>Login</Button>
-        <Button>Register</Button>
+        <SignedInMenu/>
+        {/* <SignedOutButtons/> */}
       </Navbar>
     </header>
 

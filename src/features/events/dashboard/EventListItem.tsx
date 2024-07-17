@@ -22,8 +22,8 @@ export default function EventListItem({ event }: Props) {
           </div>
         </div>
         <div className='flex flex-row items-center'>
-          <ClockIcon className='size-4'/> {event.date}
-          <MapPinIcon className='size-4'/> {event.venue}
+          <ClockIcon className='size-4' /> {event.date}
+          <MapPinIcon className='size-4' /> {event.venue}
         </div>
         <ul className='flex flex-row gap-3 py-5'>
           {event.attendees.map(attendee => (
@@ -34,11 +34,11 @@ export default function EventListItem({ event }: Props) {
           <span>{event.description}</span>
           <div className='flex flex-row justify-end gap-3'>
             <Button
-              color='red'
-            >Delete</Button>
-            <Button
-              color='teal'
+              color='success'
             >View</Button>
+            <Button
+              color='failure'
+            >Delete</Button>
           </div>
         </div>
       </div>
