@@ -2,6 +2,7 @@ import EventListAttendee from './EventListAttendee'
 import { AppEvent } from '../../../types'
 import { Button, Card } from 'flowbite-react'
 import { ClockIcon, MapPinIcon } from '@heroicons/react/24/solid'
+import { Link } from 'react-router-dom'
 
 interface Props {
   event: AppEvent
@@ -35,8 +36,10 @@ export default function EventListItem({ event }: Props) {
           <div className='flex flex-row justify-end gap-3'>
             <Button
               color='success'
+              as={Link}
+              to={`/events/${event.id}`}
             >View</Button>
-            <Button
+            <Button              
               color='failure'
             >Delete</Button>
           </div>
