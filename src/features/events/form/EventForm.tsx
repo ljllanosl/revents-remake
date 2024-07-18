@@ -1,5 +1,6 @@
 import { Button, Card, TextInput } from 'flowbite-react'
 import { ChangeEvent, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function EventForm() {
   const initialValues = {
@@ -54,7 +55,7 @@ export default function EventForm() {
           placeholder='Category'
           value={values.category}
           onChange={e => handleInputChange(e)}
-        />        
+        />
         <TextInput
           type='text'
           name='description'
@@ -88,8 +89,8 @@ export default function EventForm() {
           onChange={e => handleInputChange(e)}
         />
         <div className='flex flex-row gap-3 mt-3 justify-end'>
-          <Button type='button'>Cancel</Button>
-          <Button type='submit' color='green'>Submit</Button>
+          <Button as={Link} to='/events' color='gray'>Cancel</Button>
+          <Button type='submit'>Submit</Button>
         </div>
       </form>
     </Card>

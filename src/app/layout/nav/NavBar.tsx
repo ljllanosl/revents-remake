@@ -12,7 +12,7 @@ export default function NavBar() {
     <header className='bg-gradient-to-br from-blue-900 from-0% via-cyan-700 via-70% to-teal-500 to-90% fixed top-0 left-0 right-0 z-10'>
       <Navbar className=' bg-transparent text-white max-w-6xl mx-auto'>
         <Navbar.Brand as={NavLink} to='/'>
-          <img src='./logo.png' alt='logo' className='size-8' />
+          <img src='/logo.png' alt='logo' className='size-8' />
           <span className='font-medium text-xl'>Re-vents</span>
         </Navbar.Brand>
         <NavLink to='/events'>

@@ -6,7 +6,7 @@ import EventDetailedSidebar from './EventDetailedSidebar'
 export default function EventDetailedPage() {
   return (
     <div className='flex flex-row gap-5 mt-28 max-w-6xl mx-auto'>
-      <section className='w-8/12'>
+      <section className='w-8/12 flex flex-col gap-5'>
         <EventDetailedHeader />
         <EventDetailedInfo />
         <EventDetailedChat />
