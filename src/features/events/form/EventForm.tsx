@@ -1,9 +1,15 @@
 import { Button, Card, TextInput } from 'flowbite-react'
 import { ChangeEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useEventStore } from '../../../app/store/event'
 
 export default function EventForm() {
-  const initialValues = {
+  let {id} = useParams()
+  const event = useEventStore((state) => state.events.find((e) => e.id === id))
+  const { createEvent, updateEvent } = useEventStore((state) => state)
+  const navigate = useNavigate()
+
+  const initialValues = event ?? {
     title: '',
     category: '',
     description: '',
@@ -15,18 +21,18 @@ export default function EventForm() {
   const [values, setValues] = useState(initialValues)
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    id = id ?? crypto.randomUUID()
     e.preventDefault()
-    console.log(values)
-    // selectedEvent
-    //   ? updatedEvent({ ...selectedEvent, ...values })
-    //   : addEvent({
-    //     ...values,
-    //     id: crypto.randomUUID(),
-    //     attendees: [],
-    //     hostPhotoURL: '',
-    //     hostedBy: '',
-    //   })
-    // setFormOpen(false)
+    event
+      ? updateEvent({ ...event, ...values })
+      : createEvent({
+        ...values,
+        id,
+        attendees: [],
+        hostPhotoURL: '',
+        hostedBy: 'Bob',
+      })
+    navigate(`/events/${id}`)
   }
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
@@ -37,7 +43,7 @@ export default function EventForm() {
   return (
     <Card className='mt-28 mx-auto max-w-6xl'>
       <h1 className='text-tremor-title text-tremor-content-strong font-semibold'>
-        {'Create Event'}
+        {event ? 'Update Event' : 'Create Event'}
       </h1>
       <form className='flex flex-col gap-2 mt-2' onSubmit={onSubmit}>
         <TextInput
@@ -47,6 +53,7 @@ export default function EventForm() {
           placeholder='Event Title'
           value={values.title}
           onChange={e => handleInputChange(e)}
+          required
         />
         <TextInput
           type='text'
@@ -55,6 +62,7 @@ export default function EventForm() {
           placeholder='Category'
           value={values.category}
           onChange={e => handleInputChange(e)}
+          required
         />
         <TextInput
           type='text'
@@ -63,6 +71,7 @@ export default function EventForm() {
           placeholder='Description'
           value={values.description}
           onChange={e => handleInputChange(e)}
+          required
         />
         <TextInput
           type='text'
@@ -71,6 +80,7 @@ export default function EventForm() {
           placeholder='City'
           value={values.city}
           onChange={e => handleInputChange(e)}
+          required
         />
         <TextInput
           type='text'
@@ -79,6 +89,7 @@ export default function EventForm() {
           placeholder='Venue'
           value={values.venue}
           onChange={e => handleInputChange(e)}
+          required
         />
         <TextInput
           type='text'
@@ -87,6 +98,7 @@ export default function EventForm() {
           placeholder='Date'
           value={values.date}
           onChange={e => handleInputChange(e)}
+          required
         />
         <div className='flex flex-row gap-3 mt-3 justify-end'>
           <Button as={Link} to='/events' color='gray'>Cancel</Button>

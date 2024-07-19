@@ -18,6 +18,9 @@ export default function NavBar() {
         <NavLink to='/events'>
           <span className='font-medium text-xl' >Events</span>
         </NavLink>
+        <NavLink to='/scratch'>
+          <span className='font-medium text-xl' >Scratch</span>
+        </NavLink>
         <Button as={NavLink} to='/createEvent'>Create Event</Button>
         {auth ? <SignedInMenu setAuth={setAuth} /> : <SignedOutButtons setAuth={setAuth} />}
       </Navbar>

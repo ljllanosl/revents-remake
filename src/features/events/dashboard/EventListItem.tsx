@@ -3,12 +3,14 @@ import { AppEvent } from '../../../types'
 import { Button, Card } from 'flowbite-react'
 import { ClockIcon, MapPinIcon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom'
+import { useEventStore } from '../../../app/store/event'
 
 interface Props {
   event: AppEvent
 }
 
 export default function EventListItem({ event }: Props) {
+  const { deleteEvent } = useEventStore((state) => state)
   return (
     <Card>
       <div className='flex flex-col'>
@@ -39,8 +41,9 @@ export default function EventListItem({ event }: Props) {
               as={Link}
               to={`/events/${event.id}`}
             >View</Button>
-            <Button              
+            <Button
               color='failure'
+              onClick={() => deleteEvent(event.id)}
             >Delete</Button>
           </div>
         </div>
