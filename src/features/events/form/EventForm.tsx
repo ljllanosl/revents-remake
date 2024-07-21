@@ -1,43 +1,38 @@
-import { Button, Card, TextInput } from 'flowbite-react'
-import { ChangeEvent, useState } from 'react'
+import { Button, Card, TextInput, Textarea, Select } from 'flowbite-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEventStore } from '../../../app/store/event'
+import { FieldValues, useForm, Controller } from 'react-hook-form'
+import { categoryOptions } from './categoryOptions'
+import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker from 'react-datepicker'
 
 export default function EventForm() {
-  let {id} = useParams()
+  const { register, handleSubmit, control, setValue, formState: { errors, isValid, isSubmitting } } = useForm({
+    mode: 'onTouched',
+  })
+  let { id } = useParams()
   const event = useEventStore((state) => state.events.find((e) => e.id === id))
   const { createEvent, updateEvent } = useEventStore((state) => state)
   const navigate = useNavigate()
 
-  const initialValues = event ?? {
-    title: '',
-    category: '',
-    description: '',
-    city: '',
-    venue: '',
-    date: ''
-  }
-
-  const [values, setValues] = useState(initialValues)
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(data: FieldValues) {
+    console.log(data)
     id = id ?? crypto.randomUUID()
-    e.preventDefault()
     event
-      ? updateEvent({ ...event, ...values })
+      ? updateEvent({ ...event, ...data, date: data.date.toString() })
       : createEvent({
-        ...values,
         id,
+        title: data.title,
+        category: data.title,
+        description: data.description,
+        city: data.city,
+        venue: data.venue,
         attendees: [],
         hostPhotoURL: '',
         hostedBy: 'Bob',
+        date: data.date.toString(),
       })
     navigate(`/events/${id}`)
-  }
-
-  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target
-    setValues({ ...values, [name]: value })
   }
 
   return (
@@ -45,64 +40,72 @@ export default function EventForm() {
       <h1 className='text-tremor-title text-tremor-content-strong font-semibold'>
         {event ? 'Update Event' : 'Create Event'}
       </h1>
-      <form className='flex flex-col gap-2 mt-2' onSubmit={onSubmit}>
+      <form className='flex flex-col gap-2 mt-2' onSubmit={handleSubmit(onSubmit)}>
         <TextInput
-          type='text'
-          id='title'
-          name='title'
           placeholder='Event Title'
-          value={values.title}
-          onChange={e => handleInputChange(e)}
-          required
+          defaultValue={event?.title || ''}
+          {...register('title', { required: 'Title is required' })}
+          color={errors.title ? 'failure' : 'gray'}
+          helperText={errors.title ? <span>{`${errors.title.message}`}</span> : ''}
         />
-        <TextInput
-          type='text'
-          id='category'
-          name='category'
-          placeholder='Category'
-          value={values.category}
-          onChange={e => handleInputChange(e)}
-          required
-        />
-        <TextInput
-          type='text'
-          name='description'
-          id='description'
+        <Select
+          defaultValue={event?.category || ''}
+          {...register('category', { required: 'Category is required' })}
+          color={errors.category ? 'failure' : 'gray'}
+          helperText={errors.category ? <span>{`${errors.category.message}`}</span> : ''}
+        >
+          {categoryOptions.map((category) => (
+            <option key={category.value} value={category.value}>{category.text}</option>
+          ))}
+        </Select>
+        <Textarea
           placeholder='Description'
-          value={values.description}
-          onChange={e => handleInputChange(e)}
-          required
+          defaultValue={event?.description || ''}
+          {...register('description', { required: 'Description is required' })}
+          color={errors.description ? 'failure' : 'gray'}
+          helperText={errors.description ? <span>{`${errors.description.message}`}</span> : ''}
         />
         <TextInput
-          type='text'
-          name='city'
-          id='city'
           placeholder='City'
-          value={values.city}
-          onChange={e => handleInputChange(e)}
-          required
+          defaultValue={event?.city || ''}
+          {...register('city', { required: 'City is required' })}
+          color={errors.city ? 'failure' : 'gray'}
+          helperText={errors.city ? <span>{`${errors.city.message}`}</span> : ''}
         />
         <TextInput
-          type='text'
-          name='venue'
-          id='venue'
           placeholder='Venue'
-          value={values.venue}
-          onChange={e => handleInputChange(e)}
-          required
+          defaultValue={event?.venue || ''}
+          {...register('venue', { required: 'Venue is required' })}
+          color={errors.venue ? 'failure' : 'gray'}
+          helperText={errors.venue ? <span>{`${errors.venue.message}`}</span> : ''}
         />
-        <TextInput
-          type='text'
+        <Controller
           name='date'
-          id='date'
-          placeholder='Date'
-          value={values.date}
-          onChange={e => handleInputChange(e)}
-          required
+          control={control}
+          rules={{ required: 'Date is required' }}
+          defaultValue={event && new Date(event.date) || null}
+          render={({ field }) => (
+            <DatePicker
+              className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-tremor-primary focus:border-tremor-primary'
+              selected={field.value}
+              onChange={value => setValue('date', value, { shouldValidate: true })}
+              dateFormat='MMM d, yyyy'
+              placeholderText='Event date & time'
+            />
+          )}
         />
+
         <div className='flex flex-row gap-3 mt-3 justify-end'>
-          <Button as={Link} to='/events' color='gray'>Cancel</Button>
-          <Button type='submit'>Submit</Button>
+          <Button
+            disabled={!isValid}
+            type='submit'
+            isProcessing={isSubmitting}
+          >Submit</Button>
+          <Button
+            as={Link}
+            to='/events'
+            color='gray'
+          >Cancel</Button>
         </div>
       </form>
     </Card>
