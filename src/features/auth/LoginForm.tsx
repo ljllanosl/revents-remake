@@ -2,6 +2,7 @@ import { FieldValues, useForm } from 'react-hook-form'
 import ModalWrapper from '../../app/common/modals/ModalWrapper'
 import { useModalStore } from '../../app/store/modal'
 import { Button, TextInput } from 'flowbite-react'
+import { useAuthStore } from '../../app/store/auth'
 
 export default function LoginForm() {
 
@@ -10,9 +11,10 @@ export default function LoginForm() {
   })
 
   const { closeModal } = useModalStore((state) => state)
+  const { signIn } = useAuthStore((state) => state)
 
   function onSubmit(data: FieldValues) {
-    console.log(data)
+    signIn(data.email)
     closeModal()
   }
 

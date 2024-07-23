@@ -1,11 +1,11 @@
 import { Button, Navbar } from 'flowbite-react'
 import { NavLink } from 'react-router-dom'
 import SignedInMenu from './SignedInMenu'
-import { useState } from 'react'
 import SignedOutButtons from './SignedOutButtons'
+import { useAuthStore } from '../../store/auth'
 
 export default function NavBar() {
-  const [auth, setAuth] = useState(false)
+  const { authenticated } = useAuthStore((state) => state)
 
   return (
     // Simple navbar with tailwind
@@ -22,7 +22,7 @@ export default function NavBar() {
           <span className='font-medium text-xl' >Scratch</span>
         </NavLink>
         <Button as={NavLink} to='/createEvent'>Create Event</Button>
-        {auth ? <SignedInMenu setAuth={setAuth} /> : <SignedOutButtons setAuth={setAuth} />}
+        {authenticated ? <SignedInMenu /> : <SignedOutButtons />}
       </Navbar>
     </header>
 
