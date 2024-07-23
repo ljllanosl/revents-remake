@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { persist } from 'zustand/middleware'
 import { AppEvent } from '../../types'
 import { sampleData } from '../api/sampleData'
 
@@ -11,23 +11,23 @@ interface EventState {
 }
 
 export const useEventStore = create<EventState>()(
-  devtools(
+  persist(
     (set) => ({
       events: sampleData,
       createEvent: (event) =>
         set((state) => ({
           events: [...state.events, event]
-        }), false, 'createEvent')
+        }))
       ,
       updateEvent: (event) =>
         set((state) => ({
           events: state.events.map((e) => (e.id === event.id ? event : e)),
-        }), false, 'updateEvent')
+        }))
       ,
       deleteEvent: (id) =>
         set((state) => ({
           events: state.events.filter((e) => e.id !== id),
-        }), false, 'deleteEvent')
+        }))
     }),
     { name: 'events' }
   )

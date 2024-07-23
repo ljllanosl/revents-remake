@@ -16,14 +16,13 @@ export default function EventForm() {
   const navigate = useNavigate()
 
   function onSubmit(data: FieldValues) {
-    console.log(data)
     id = id ?? crypto.randomUUID()
     event
       ? updateEvent({ ...event, ...data, date: data.date.toString() })
       : createEvent({
         id,
         title: data.title,
-        category: data.title,
+        category: data.category,
         description: data.description,
         city: data.city,
         venue: data.venue,
