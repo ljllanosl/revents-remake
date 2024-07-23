@@ -5,12 +5,12 @@ interface State {
   open: boolean
   type: string | null
   data: any
-  openModal: (type: string, data: any) => void
+  openModal: (type: string, data?: any) => void
   closeModal: () => void
 }
 
-export const useModalStore = create<State>()(
-  (persist((set) => ({
+export const useModalStore = create<State>(
+  (set) => ({
     open: false,
     type: null,
     data: null,
@@ -26,7 +26,5 @@ export const useModalStore = create<State>()(
         type: null,
         data: null
       }))
-  }),
-    { name: 'modal' }
-  ))
+  })
 )

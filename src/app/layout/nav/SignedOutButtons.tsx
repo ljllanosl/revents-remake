@@ -1,13 +1,15 @@
 import { Button } from 'flowbite-react'
+import { useModalStore } from '../../store/modal'
 
-interface Props{
-  setAuth: (auth: boolean) => void
-}
+export default function SignedOutButtons() {
+  const { openModal } = useModalStore((state) => state)
 
-export default function SignedOutButtons({setAuth}: Props) {
   return (
     <>
-      <Button className='bg-transparent border-white' onClick={() => setAuth(true)}>Login</Button>
+      <Button
+        className='bg-transparent border-white'
+        onClick={() => openModal('LoginForm')}
+      >Login</Button>
       <Button className='bg-transparent border-white'>Register</Button>
     </>
   )

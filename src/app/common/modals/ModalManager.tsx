@@ -1,9 +1,11 @@
+import LoginForm from '../../../features/auth/LoginForm'
 import TestModal from '../../../features/scratch/TestModal'
 import { useModalStore } from '../../store/modal'
 
 export default function ModalManager() {
   const modalLookup = {
-    TestModal
+    TestModal,
+    LoginForm
   }
 
   const { type, data, open } = useModalStore((state) => state)

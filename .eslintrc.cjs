@@ -21,6 +21,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off',
     "no-undef": "off",
     'jsx-quotes': ['error', 'prefer-single'],
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    'no-useless-escape': 'off'
   },
 }
