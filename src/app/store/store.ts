@@ -1,14 +1,14 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-interface ScractState {
+interface ScratchState {
   count: number
   increment: () => void
   decrement: () => void
   incrementBy: (amount: number) => void
 }
 
-export const useScratchStore = create<ScractState>()(
+export const useScratchStore = create<ScratchState>()(
   devtools((set) => ({
     count: 0,
     increment: () => set((state) => ({ count: state.count + 1 }), false, 'increment'),
