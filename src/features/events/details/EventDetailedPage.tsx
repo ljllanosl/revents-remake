@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import EventDetailedChat from './EventDetailedChat'
 import EventDetailedHeader from './EventDetailedHeader'
 import EventDetailedInfo from './EventDetailedInfo'
 import EventDetailedSidebar from './EventDetailedSidebar'

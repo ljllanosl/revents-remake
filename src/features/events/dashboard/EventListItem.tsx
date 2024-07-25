@@ -1,6 +1,6 @@
 import EventListAttendee from './EventListAttendee'
 import { AppEvent } from '../../../types'
-import { Button, Card } from 'flowbite-react'
+import { Button } from 'flowbite-react'
 import { ClockIcon, MapPinIcon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom'
 import { useEventStore } from '../../../app/store/event'

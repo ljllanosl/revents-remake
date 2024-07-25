@@ -10,7 +10,7 @@ type Props = {
 
 export default function ModalWrapper({ children, header }: Props) {
 
-  const { openModal, closeModal, open } = useModalStore((state) => state)
+  const { closeModal, open } = useModalStore((state) => state)
   return (
 
     <Modal show={open} onClose={() => closeModal()} >
