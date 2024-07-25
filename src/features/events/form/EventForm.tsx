@@ -14,11 +14,12 @@ export default function EventForm() {
   const event = useEventStore((state) => state.events.find((e) => e.id === id))
   const { createEvent, updateEvent } = useEventStore((state) => state)
   const navigate = useNavigate()
+  console.log(event)
 
   function onSubmit(data: FieldValues) {
     id = id ?? crypto.randomUUID()
     event
-      ? updateEvent({ ...event, ...data, date: data.date.toString() })
+      ? updateEvent({ ...event, ...data, date: data.date.toISOString().split('T')[0]})
       : createEvent({
         id,
         title: data.title,
@@ -29,7 +30,7 @@ export default function EventForm() {
         attendees: [],
         hostPhotoURL: '',
         hostedBy: 'Bob',
-        date: data.date.toString(),
+        date: data.date.toISOString().split('T')[0],
       })
     navigate(`/events/${id}`)
   }

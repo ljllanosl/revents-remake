@@ -12,9 +12,9 @@ interface Props {
 export default function EventListItem({ event }: Props) {
   const { deleteEvent } = useEventStore((state) => state)
   return (
-    <Card>
-      <div className='flex flex-col'>
-        <div className='flex flex-row gap-5'>
+    <div className='py-6 bg-white border border-gray-200 rounded-lg shadow'>
+      <div className='flex flex-col gap-3'>
+        <div className='flex flex-row gap-5 px-6'>
           <div className='w-2/12'>
             <img src={event.hostPhotoURL || '/user.png'} alt='user' className='rounded-full' />
           </div>
@@ -24,16 +24,17 @@ export default function EventListItem({ event }: Props) {
             <p>Hosted by {event.hostedBy}</p>
           </div>
         </div>
-        <div className='flex flex-row items-center'>
-          <ClockIcon className='size-4' /> {event.date}
-          <MapPinIcon className='size-4' /> {event.venue}
+        <hr />
+        <div className='flex flex-row items-center gap-2 px-6'>
+          <ClockIcon className='size-6' /> {event.date}
+          <MapPinIcon className='size-6' /> {event.venue}
         </div>
-        <ul className='flex flex-row gap-3 py-5'>
+        <ul className='flex flex-row gap-3 py-5 px-6 bg-slate-200'>
           {event.attendees.map(attendee => (
             <EventListAttendee key={attendee.id} attendee={attendee} />
           ))}
         </ul>
-        <div className='flex flex-row justify-between items-center '>
+        <div className='flex flex-row justify-between items-center px-6 gap-3'>
           <span>{event.description}</span>
           <div className='flex flex-row justify-end gap-3'>
             <Button
@@ -48,6 +49,6 @@ export default function EventListItem({ event }: Props) {
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   )
 }

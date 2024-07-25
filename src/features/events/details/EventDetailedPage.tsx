@@ -16,7 +16,7 @@ export default function EventDetailedPage() {
       <section className='w-8/12 flex flex-col gap-5'>
         <EventDetailedHeader event={event}/>
         <EventDetailedInfo event={event}/>
-        <EventDetailedChat />
+        {/* <EventDetailedChat /> */}
       </section>
       <section className='w-4/12'>
         <EventDetailedSidebar />
