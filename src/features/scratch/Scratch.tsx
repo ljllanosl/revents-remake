@@ -7,7 +7,7 @@ export default function Scratch() {
   const { openModal } = useModalStore((state) => state)
 
   return (
-    <div className='mt-28 mx-auto max-w-6xl'>
+    <>
       <h1>Scratch page</h1>
       <h3>The data is: {count}</h3>
       <div className='flex flex-row gap-1'>
@@ -16,6 +16,6 @@ export default function Scratch() {
         <Button onClick={() => incrementBy(5)}>Increment by 5</Button>
         <Button onClick={() => openModal('TestModal', count)}>Open modal</Button>
       </div>
-    </div >
+    </>
   )
 }

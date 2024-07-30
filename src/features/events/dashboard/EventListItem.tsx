@@ -26,17 +26,19 @@ export default function EventListItem({ event }: Props) {
         </div>
         <hr />
         <div className='flex flex-row items-center gap-2 px-6'>
-          <ClockIcon className='size-6' /> {event.date}
-          <MapPinIcon className='size-6' /> {event.venue}
+          <ClockIcon className='size-6 shrink-0' />
+          <p className='shrink-0'>{event.date}</p>
+          <MapPinIcon className='size-6 shrink-0' />
+          <p className='truncate'>{event.venue}</p>
         </div>
         <ul className='flex flex-row gap-3 py-5 px-6 bg-slate-200'>
           {event.attendees.map(attendee => (
             <EventListAttendee key={attendee.id} attendee={attendee} />
           ))}
         </ul>
-        <div className='flex flex-row justify-between items-center px-6 gap-3'>
+        <div className='flex flex-col sm:flex-row px-6 gap-3'>
           <span>{event.description}</span>
-          <div className='flex flex-row justify-end gap-3'>
+          <div className='flex flex-row gap-3 items-center'>
             <Button
               color='success'
               as={Link}

@@ -12,7 +12,10 @@ function App() {
         <>
           <ModalManager />
           <NavBar />
-          <Outlet />
+          <main className='mt-28 mb-4 px-4 md:px-0 mx-auto max-w-screen-md'>
+            <Outlet />
+          </main>
+
         </>
       )}
     </>

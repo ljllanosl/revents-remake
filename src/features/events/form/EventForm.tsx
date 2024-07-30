@@ -14,12 +14,11 @@ export default function EventForm() {
   const event = useEventStore((state) => state.events.find((e) => e.id === id))
   const { createEvent, updateEvent } = useEventStore((state) => state)
   const navigate = useNavigate()
-  console.log(event)
 
   function onSubmit(data: FieldValues) {
     id = id ?? crypto.randomUUID()
     event
-      ? updateEvent({ ...event, ...data, date: data.date.toISOString().split('T')[0]})
+      ? updateEvent({ ...event, ...data, date: data.date.toISOString().split('T')[0] })
       : createEvent({
         id,
         title: data.title,
@@ -36,7 +35,7 @@ export default function EventForm() {
   }
 
   return (
-    <Card className='mt-28 mx-auto max-w-6xl'>
+    <Card>
       <h1 className='text-tremor-title text-tremor-content-strong font-semibold'>
         {event ? 'Update Event' : 'Create Event'}
       </h1>
@@ -86,7 +85,7 @@ export default function EventForm() {
           defaultValue={event && new Date(event.date) || null}
           render={({ field }) => (
             <DatePicker
-              className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-tremor-primary focus:border-tremor-primary'
+              className='block w-full border disabled:cursor-not-allowed disabled:opacity-50 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-lg'
               selected={field.value}
               onChange={value => setValue('date', value, { shouldValidate: true })}
               dateFormat='MMM d, yyyy'
